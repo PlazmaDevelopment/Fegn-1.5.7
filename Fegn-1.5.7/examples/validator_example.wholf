@@ -1,0 +1,41 @@
+// Veri doğrulama örneği
+
+// Veri doğrulama
+fegn Validator {
+    // Temel doğrulama
+    validate: ("email", "ahmet@example.com") => {
+        Console.log("E-posta doğrulama başarılı")
+    },
+    
+    // Kullanıcı doğrulama
+    validateUser: ({
+        email: "ahmet@example.com",
+        age: "25",
+        name: "Ahmet"
+    }) => {
+        Console.log("Kullanıcı doğrulama başarılı")
+    }
+}
+
+// E-posta doğrulama
+var isValidEmail = Validator.validate("email", "ahmet@example.com")
+Console.log("E-posta geçerli: " + isValidEmail)
+
+// Kullanıcı doğrulama
+var user = {
+    email: "ahmet@example.com",
+    age: "25",
+    name: "Ahmet"
+}
+
+var isValidUser = Validator.validateUser(user)
+Console.log("Kullanıcı geçerli: " + isValidUser)
+
+// Hata alımı
+var errors = Validator.getErrors()
+if (errors.length > 0) {
+    Console.log("Hatalar:")
+    for (var error of errors) {
+        Console.log("- " + error.message)
+    }
+}

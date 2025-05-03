@@ -1,0 +1,29 @@
+// Cache yönetimi örneği
+
+// Cache yöneticisi
+fegn Cache {
+    // Önbelleğe değer ekle
+    set: ("kullanici", "Ahmet", 5 seconds) => {
+        Console.log("Kullanıcı önbelleğe eklendi")
+    },
+    
+    // Önbellekten değer al
+    get: ("kullanici") => {
+        Console.log("Önbellekten kullanıcı alındı")
+    },
+    
+    // Önbellekten değer sil
+    remove: ("kullanici") => {
+        Console.log("Kullanıcı önbellekten silindi")
+    }
+}
+
+// Önbelleğe değer ekle
+Cache.set("kullanici", "Ahmet", 5 seconds)
+
+// Önbellekten değer al
+var kullanici = Cache.get("kullanici")
+Console.log("Kullanıcı: " + kullanici)
+
+// Önbellekten değer sil
+Cache.remove("kullanici")

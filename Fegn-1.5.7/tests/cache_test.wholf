@@ -1,0 +1,35 @@
+// Cache testleri
+test "Cache yönetimi testi" {
+    // Cache yöneticisi
+    fegn Cache {
+        // Önbelleğe değer ekle
+        set: ("test", "data", 1 second) => {
+            assert true
+        },
+        
+        // Önbellekten değer al
+        get: ("test") => {
+            assert true
+        },
+        
+        // Önbellekten değer sil
+        remove: ("test") => {
+            assert true
+        }
+    }
+    
+    // Önbelleğe değer ekle
+    Cache.set("test", "data", 1 second)
+    
+    // Önbellekten değer al
+    var data = Cache.get("test")
+    assert data == "data"
+    
+    // Önbellekten değer sil
+    Cache.remove("test")
+    
+    // Süre geçtikten sonra değer al
+    sleep(2 seconds)
+    var expiredData = Cache.get("test")
+    assert expiredData == ""
+}

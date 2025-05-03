@@ -1,0 +1,46 @@
+// Veri doğrulama testleri
+test "Veri doğrulama testi" {
+    // Veri doğrulama
+    fegn Validator {
+        // Temel doğrulama testi
+        validate: ("email", "test@example.com") => {
+            assert true
+        },
+        
+        // Geçersiz e-posta testi
+        validate: ("email", "invalid") => {
+            assert false
+        },
+        
+        // Kullanıcı doğrulama testi
+        validateUser: ({
+            email: "test@example.com",
+            age: "25",
+            name: "Test"
+        }) => {
+            assert true
+        }
+    }
+    
+    // E-posta doğrulama
+    var isValidEmail = Validator.validate("email", "test@example.com")
+    assert isValidEmail == true
+    
+    // Geçersiz e-posta
+    var isInvalidEmail = Validator.validate("email", "invalid")
+    assert isInvalidEmail == false
+    
+    // Kullanıcı doğrulama
+    var user = {
+        email: "test@example.com",
+        age: "25",
+        name: "Test"
+    }
+    
+    var isValidUser = Validator.validateUser(user)
+    assert isValidUser == true
+    
+    // Hata alımı
+    var errors = Validator.getErrors()
+    assert errors.length == 0
+}

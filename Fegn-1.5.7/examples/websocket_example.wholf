@@ -1,0 +1,27 @@
+// WebSocket entegrasyonu örneği
+
+// WebSocket bağlantısı
+fegn WebSocket {
+    connect: "wss://ws.example.com",
+    
+    // Mesaj alımı
+    onMessage: (message) => {
+        Console.log("Mesaj alındı: " + message)
+    },
+    
+    // Hata yönetimi
+    onError: (error) => {
+        Console.log("Hata: " + error)
+    },
+    
+    // Bağlantı kesilmesi
+    onClose: () => {
+        Console.log("Bağlantı kesildi")
+    }
+}
+
+// Bağlantıyı kur
+WebSocket.connect()
+
+// Mesaj gönder
+WebSocket.send("Merhaba, WebSocket!")

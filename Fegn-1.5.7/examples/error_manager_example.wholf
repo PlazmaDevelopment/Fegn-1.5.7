@@ -1,0 +1,30 @@
+// Hata yönetimi örneği
+
+// Hata yöneticisi
+fegn ErrorManager {
+    // Hata yönetimi
+    handleError: ("Beklenmeyen hata oluştu", "error") => {
+        Console.log("Hata yönetildi")
+    },
+    
+    // Hata kaydı
+    logError: (error) => {
+        Console.log("Hata kaydedildi")
+    }
+}
+
+// Hata tetikleme
+try {
+    throw new Error("Beklenmeyen hata")
+} catch (error) {
+    ErrorManager.handleError(error.message, "error")
+}
+
+// Hataları al
+var errors = ErrorManager.getErrors()
+if (errors.length > 0) {
+    Console.log("Hatalar:")
+    for (var error of errors) {
+        Console.log("- " + error.message)
+    }
+}

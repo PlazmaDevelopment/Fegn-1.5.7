@@ -1,0 +1,28 @@
+// Hata yönetimi testleri
+test "Hata yönetimi testi" {
+    // Hata yöneticisi
+    fegn ErrorManager {
+        // Hata yönetimi testi
+        handleError: ("Test hata", "error") => {
+            assert true
+        },
+        
+        // Hata kaydı testi
+        logError: (error) => {
+            assert true
+        }
+    }
+    
+    // Hata tetikleme
+    try {
+        throw new Error("Test hata")
+    } catch (error) {
+        ErrorManager.handleError(error.message, "error")
+    }
+    
+    // Hataları al
+    var errors = ErrorManager.getErrors()
+    assert errors.length == 1
+    assert errors[0].message == "Test hata"
+    assert errors[0].type == "error"
+}
